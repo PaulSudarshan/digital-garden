@@ -1,0 +1,3 @@
+ * [Custom-ASL-Classification-using-your-hands.](https://paulsudarshan.github.io/opencv-notes/9.-Machine-Learning/Custom-ASL-Classification-using-your-hands..html),
+ * [Hog+Svm-Pedestrian-Detection](https://paulsudarshan.github.io/opencv-notes/9.-Machine-Learning/Hog+Svm-Pedestrian-Detection.html),
+ * [Image-Classification-with-HOG-+-SVM](https://paulsudarshan.github.io/opencv-notes/9.-Machine-Learning/Image-Classification-with-HOG-+-SVM.html)

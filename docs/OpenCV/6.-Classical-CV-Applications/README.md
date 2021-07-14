@@ -1,0 +1,5 @@
+ * [6.01-Shape-Detection-Application-pt-1-(On-Images)](https://paulsudarshan.github.io/opencv-notes/6.-Classical-CV-Applications/6.01-Shape-Detection-Application-pt-1-(On-Images).html),
+ * [6.02-Shape-Detection-Application-pt-2-(On-GUI-_-Web-cam-)](https://paulsudarshan.github.io/opencv-notes/6.-Classical-CV-Applications/6.02-Shape-Detection-Application-pt-2-(On-GUI-_-Web-cam-).html),
+ * [6.03-Creating-a-Virtual-Pen-_-Eraser](https://paulsudarshan.github.io/opencv-notes/6.-Classical-CV-Applications/6.03-Creating-a-Virtual-Pen-_-Eraser.html),
+ * [6.04-Building-the-Harry-Potter-Invisibility-Cloak](https://paulsudarshan.github.io/opencv-notes/6.-Classical-CV-Applications/6.04-Building-the-Harry-Potter-Invisibility-Cloak.html),
+ * [6.05-Creating--a-Virtual-Drum](https://paulsudarshan.github.io/opencv-notes/6.-Classical-CV-Applications/6.05-Creating--a-Virtual-Drum.html)
