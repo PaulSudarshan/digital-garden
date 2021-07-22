@@ -1,0 +1,8 @@
+* [Module 0：Welcome to the self-driving cars specialization](/docs/coursera/autonomous-vehicle/Part1-Introduction_to_Self-Driving_Cars/Module0-Welcome_to_the_self-driving_cars_specialization/module0-welcome-to-the-self-driving-cars-specialization.md)
+  * [Module 1：The Requirements for Autonomy](/docs/coursera/autonomous-vehicle/Part1-Introduction_to_Self-Driving_Cars/Module1-The_Requirements_for_Autonomy/module1-the-requirements-for-autonomy.md)
+  * [Module2：Self-Driving Hardware and Software Architectures](/docs/coursera/autonomous-vehicle/Part1-Introduction_to_Self-Driving_Cars/Module2-Self-Driving_Hardware_and_Software_Architectures/module2-self-driving-hardware-and-software-architectures.md)
+  * [Module3：Safety Assurance for Autonomous Vehicles](/docs/coursera/autonomous-vehicle/Part1-Introduction_to_Self-Driving_Cars/Module3-Safety_Assurance_for_Autonomous_Vehicles/module3-safety-assurance-for-autonomous-vehicles.md)
+  * [Module4：Vehicle Dynamic Modeling](/docs/coursera/autonomous-vehicle/Part1-Introduction_to_Self-Driving_Cars/Module4-Vehicle_Dynamic_Modeling/module4-vehicle-dynamic-modeling.md)
+  * [Module 5：Vehicle Longitudinal Control](/docs/coursera/autonomous-vehicle/Part1-Introduction_to_Self-Driving_Cars/Module5-Vehicle_Longitudinal_Control/module-5-vehicle-longitudinal-control.md)
+  * [Module 6：Vehicle Lateral Control](/docs/coursera/autonomous-vehicle/Part1-Introduction_to_Self-Driving_Cars/Module6-Vehicle_Lateral_Control/module-6-vehicle-lateral-control.md)
+  * [Module 7：Putting it all together](/docs/coursera/autonomous-vehicle/Part1-Introduction_to_Self-Driving_Cars/Module7-Putting_it_all_together/module-7-putting-it-all-together.md)

@@ -1,0 +1,7 @@
+- [Module 1 - The Planning Problem](/docs/coursera/autonomous-vehicle/Part4-Motion_Planning_for_Self-Driving_Cars/Module1-The_Planning_Problem/Module1-The_Planning_Problem.md)
+- [Module 2 - Mapping for Planning](/docs/coursera/autonomous-vehicle/Part4-Motion_Planning_for_Self-Driving_Cars/Module2-Mapping_for_Planning/Module2-Mapping_for_Planning.md)
+- [Module 3 - Mission Planning in Driving Environments](/docs/coursera/autonomous-vehicle/Part4-Motion_Planning_for_Self-Driving_Cars/Module3-Mission_Planning_in_Driving_Environments/Module3-Mission_Planning_in_Driving_Environments.md)
+- [Module 4 - Dynamic Object Interactions](/docs/coursera/autonomous-vehicle/Part4-Motion_Planning_for_Self-Driving_Cars/Module4-Dynamic_Object_Interactions/Module4-Dynamic_Object_Interactions.md)
+- [Module 5 - Principles of Behaviour Planning](/docs/coursera/autonomous-vehicle/Part4-Motion_Planning_for_Self-Driving_Cars/Module5-Principles_of_Behaviour_Planning/Module5-Principles_of_Behaviour_Planning.md)
+- [Module 6 - Reactive Planning in Static Environments](/docs/coursera/autonomous-vehicle/Part4-Motion_Planning_for_Self-Driving_Cars/Module6-Reactive_Planning_in_Static_Environments/Module6-Reactive_Planning_in_Static_Environments.md)
+- [Module 7 - Putting it all together - Smooth Local Planning](/docs/coursera/autonomous-vehicle/Part4-Motion_Planning_for_Self-Driving_Cars/Module7-Putting_it_all_together-Smooth_Local_Planning/Module7-Putting_it_all_together-Smooth_Local_Planning.md)
