@@ -113,13 +113,13 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - Horizontal edge detection
   - Filter would be like this
 
-    ```
-    1	1	1
-    0	0	0
-    -1	-1	-1
-    ```
+```
+  1	1	1
+  0	0	0
+  -1	-1	-1
+  ```
 
-- There are a lot of ways we can put number inside the horizontal or vertical edge detections. For example here are the vertical **Sobel** filter (The idea is taking care of the middle row):
+- There are a lot of ways we can put number inside the horizontal or vertical edge detections. For example here are the vertical **Sobel** filter (The idea is giving more weight to the middle row):
 
   ```
   1	0	-1
@@ -151,7 +151,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - In almost all the cases the padding values are zeros.
 - The general rule now,  if a matrix `nxn` is convolved with `fxf` filter/kernel and padding `p` give us `n+2p-f+1,n+2p-f+1` matrix. 
 - If n = 6, f = 3, and p = 1 Then the output image will have `n+2p-f+1 = 6+2-3+1 = 6`. We maintain the size of the image.
-- Same convolutions is a convolution with a pad so that output size is the same as the input size. Its given by the equation:
+- **Same convolution** is a convolution with a pad so that output size is the same as the input size. Its given by the equation:
 
   ```
   P = (f-1) / 2
@@ -172,7 +172,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
 - In case `(n+2p-f)/s + 1` is fraction we can take **floor** of this value.
 
-- In math textbooks the conv operation is filpping the filter before using it. What we were doing is called cross-correlation operation but the state of art of deep learning is using this as conv operation.
+- In math textbooks the conv operation is filpping the filter before using it. What we were doing is called **cross-correlation operation** but the state of art of deep learning is using this as conv operation.
 
 - Same convolutions is a convolution with a padding so that output size is the same as the input size. Its given by the equation:
 
@@ -289,28 +289,35 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - `n0 = 32` and `nc0 = 3`
   - First layer (Conv layer):        `#Conv1`
     - `f1 = 5`, `s1 = 1`, and `p1 = 0`
-    - `number of filters = 6`
-    - Then output are `a1 = 28x28x6`
-      - `n1 = 28` and `nc1 = 6`
+    - `number of filters = 8`
+    - Then output are `a1 = 28x28x8 = 6272` (activation size)
+      - `n1 = 28` and `nc1 = 8`
+    - **Number of learnable parameters (which are the filter values btw!)** = `(5x5x3+1)x8=608`
     - Then apply (Max pooling):         `#Pool1`
       - `f1p = 2`, and `s1p = 2`
-      - The output are `a1 = 14x14x6`
+      - The output are `a1 = 14x14x8=1568` (activation size)
+      - **Number of learnable parameters** = 0 (No Learnable parameters in Pooling Layers)
   - Second layer (Conv layer):   `#Conv2`
     - `f2 = 5`, `s2 = 1`, `p2 = 0`
     - `number of filters = 16`
-    - The output are `a2 = 10x10x16`
+    - The output are `a2 = 10x10x16 = 1600` (activation size)
       - `n2 = 10`, `nc2 = 16`
+    - **Number of learnable parameters (which are the filter values btw!)** = `(5x5x8+1)x16=3216`
     - Then apply (Max pooling):         `#Pool2`
       - `f2p = 2`, and `s2p = 2`
-      - The output are `a2 = 5x5x16`
+      - The output are `a2 = 5x5x16=400` (activation size)
+      - **Number of learnable parameters** = 0 (No Learnable parameters in Pooling Layers)
   - Third layer (Fully connected)   `#FC3`
     - Number of neurons are 120
-    - The output `a3 = 120 x 1` . 400 came from `5x5x16`
+    - The output `a3 = 120 x 1=120` . 400 came from `5x5x16` (Activation Size)
+    - **Number of learnable parameters (which are the neuron values btw!)** = `400x120 + 120 = 48120`
   - Forth layer (Fully connected)  `#FC4`
     - Number of neurons are 84
-    - The output `a4 = 84 x 1` .
+    - The output `a4 = 84 x 1=84`. (activation size)
+    - **Number of learnable parameters (which are the neuron values btw!)** = `120x84 + 84 = 10164`
   - Fifth layer (Softmax)
-    - Number of neurons is 10 if we need to identify for example the 10 digits.
+    - Number of neurons is 10 if we need to identify for example the 10 digits. (Activation Size)
+    - **Number of learnable parameters (which are the neuron values btw!)** = `84x10 + 10 = 850`
 - Hint a Conv1 and Pool1 is treated as one layer.
 - Some statistics about the last example:
   - ![](Images/03.png)
@@ -323,10 +330,11 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 ### Why convolutions?
 
 - Two main advantages of Convs are:
-  - Parameter sharing.
+  - **Parameter sharing.**
     - A feature detector (such as a vertical edge detector) that's useful in one part of the image is probably useful in another part of the image.
-  - sparsity of connections.
+  - **Sparsity of connections.**
     - In each layer, each output value depends only on a small number of inputs which makes it translation invariance.
+    - Convolutional structure helps the neural network encode the fact that an image shifted a few pixels should result in pretty similar features 
 - Putting it all together:
   - ![](Images/04.png)
 
@@ -428,7 +436,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - On the left is the normal NN and on the right are the ResNet. As you can see the performance of ResNet increases as the network goes deeper.
   - In some cases going deeper won't effect the performance and that depends on the problem on your hand.
   - Some people are trying to train 1000 layer now which isn't used in practice. 
-  - [He et al., 2015. Deep residual networks for image recognition]
+  - [He et al., 2015. Deep residual networks for image recognition](https://arxiv.org/pdf/1512.03385.pdf)
 
 ### Why ResNets work
 
@@ -464,8 +472,15 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
     - `a[l+2] = g( z[l+2] + ws * a[l] ) # The added Ws should make the dimensions equal`
     - ws also can be a zero padding.
+    - The skip connection is padded with extra zero entries to increase its dimensions.
+    - The projection method is used to match the dimension which is done by adding 1×1 convolutional layers to input.
 
-- Using a skip-connection helps the gradient to backpropagate and thus helps you to train deeper networks
+- The skip connections in ResNet solve the problem of vanishing gradient in deep neural networks by allowing this alternate shortcut path for the gradient to flow through. 
+- The other way that these connections help is by allowing the model to learn the identity functions which ensures that the higher layer will perform at least as good as the lower layer, and not worse.
+
+- It has been seen that residual blocks make it exceptionally easy for layers to learn identity functions. It is evident from the formulas above. In plain networks the output is
+`H(x)=f(x)`
+-In the best-case scenario, additional layers of the deep neural network can better approximate the mapping of ‘x’ to output ‘y’ than it’s the shallower counterpart and reduces the error by a significant margin. And thus we expect ResNet to perform equally or better than the plain deep neural networks.
 
 - Lets take a look at ResNet on images.
 
@@ -532,16 +547,17 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - What **inception** tells us is, Why not use all of them at once?
 - **Inception module**, naive version:
   - ![](Images/13.png)
-  - Hint that max-pool are same here.
+  - This is an unusual form of pooling because if you want the input and the output dimensions to match after pooling, then you need to use the `same` padding as well as a `stride=1` for pooling. 
   - Input to the inception module are 28 x 28 x 192 and the output are 28 x 28 x 256
   - We have done all the Convs and pools we might want and will let the NN learn and decide which it want to use most.
   - [[Szegedy et al. 2014. Going deeper with convolutions]](https://arxiv.org/abs/1409.4842)
 - The problem of computational cost in Inception model:
   - If we have just focused on a 5 x 5 Conv that we have done in the last example.
-  - There are 32 same filters of 5 x 5, and the input are 28 x 28 x 192.
+  - There are 32 same filters of (5 x 5), and the input are (28 x 28 x 192).
+  - Filter size should be 5 x 5 x 192
   - Output should be 28 x 28 x 32
   - The total number of multiplications needed here are:
-    - Number of outputs * Filter size * Filter size * Input dimensions
+    - Input Dimension * Number of filters * Filter Dimension
     - Which equals: `28 * 28 * 32 * 5 * 5 * 192 = 120 Mil` 
     - 120 Mil multiply operation still a problem in the modern day computers.
   - Using a 1 x 1 convolution we can reduce 120 mil to just 12 mil. Lets see how.
@@ -550,7 +566,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - X0 shape is (28, 28, 192)
     - We then apply 16 (1 x 1 Convolution)
     - That produces X1 of shape (28, 28, 16)
-      - Hint, we have reduced the dimensions here.
+      - Hint, we have reduced the channel dimensions here. (**Bottleneck Layer**)
     - Then apply 32  (5 x 5 Convolution)
     - That produces X2 of shape (28, 28, 32)
   - Now lets calculate the number of multiplications:
@@ -561,6 +577,14 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - It turns out that the 1 x 1 Conv won't hurt the performance.
 - **Inception module**, dimensions reduction version:
   - ![](Images/14.png)
+
+- In order to concatenate all of these outputs at the end we are going to use the `same` type of padding for MAXPOOL layer. So that the output height and width is still `28x28`.
+- If you do max-pooling, even with `same padding`, `3x3` filter, and `stride=1`. The output here will be `(28x28x192)`.
+  - The problem being that it has a lot of channels (192!!)
+  - So we add one more (1Conv) layer of `32` filters with dimensions `1x1x192` to get the final shape to be `28x28x32`. This helps us to maintain the channel dimension in the pooling layer output.
+**INCEPTION MODULE**
+-  Finally you take all of these blocks and you do channel concatenation. Just concatenate across this `64+128+32+32 = 256`, to give a `28x28x256` dimension output. 
+- This is one **inception module**, and the inception network puts a lot of these modules together to work.
 - Example of inception model in Keras:
   - ![](Images/inception_block1a.png)
 
@@ -574,6 +598,59 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - There are a 3 Sofmax branches at different positions to push the network toward its goal. and helps to ensure that the intermediate features are good enough to the network to learn and it turns out that softmax0 and sofmax1 gives regularization effect.
 - Since the development of the Inception module, the authors and the others have built another versions of this network. Like inception v2, v3, and v4. Also there is a network that has used the inception module and the ResNet together.
 - [[Szegedy et al., 2014, Going Deeper with Convolutions]](https://arxiv.org/abs/1409.4842)
+
+### MobileNet
+
+**Motivation**
+- Low computational cost at deployment
+- Useful for mobile and embedded vision applications
+- Key idea: Normal vs. Depthwise Separable Convolutions
+
+- ![](Images/45.png)
+- Total number of computations needed to compute this output is given by the number of filter parameters `3x3x3`, multiplied by the number of filter positions, that is the number of places where we place this big yellow block, which is `4x4`, and then multiplied by the number of filters which is `5`. Total computation cost = `2160`
+- Step 1 - **Depthwise Convolution**
+  - ![](Images/46.png)
+  - Take the red filter and position it on Red channel, carry out the nine multiplications. 
+  - Similarly for Blue and Green channels.
+  - The size of the output after this step will be `nout x nout x nc=(4x4x3)` (and not just 4x4!), where nc is the number of channels in your original input.
+  - Total number of computations needed to compute this output is given by the number of filter parameters `3x3`, multiplied by the number of filter positions, that is the number of places where we place each of the r,g,b block, which is `4x4`, and then multiplied by the number of filters which is `3`. Total computation cost = `432`
+- The remaining step is to take this `4x4x3`set of values, or `nout x nout x nc` set of values and apply a pointwise convolution in order to get the output we want which will be `4x4x5`.
+
+- Step 2 - **Pointwise Convolution**
+  - ![](Images/47.png)
+  - - Take the `1x1x3` block pink filter, and apply it to every positions of the previously obtained values, carry out multiplications of all the 3 channels simultaneously, add them up, and that gives value for each cell of the resultant filter. Carry on the process for `nc prime filters` times, in our case `nc'=5` to obtain `4x4x5` output. Total computation cost = `240`.
+
+**Cost of normal convolution**: 2160
+  
+**Cost of depthwise separable convolution**
+
+    - Cost of deptwise convolution : 432
+    - Cost of pointwise convolution : 240
+    - Total                         : 672
+
+- How much efficient?
+  - (672/2160)*100 = nearly 31% more efficient
+  - General Formula : `1/nc(prime) + 1/f^2`, in our case 1/5 + 1/9 = 0.31 or 31%
+
+### MobileNet Architecture
+
+- ![](Images/48.png)
+- MobileNet V1 would use a depthwise convolutional operation to generate outputs and then have a stack of 13 of these layers in order to go from the original raw input image to finally making a classification prediction. 
+- The neural network's last few layers are the usual Pooling layer, followed by a fully connected layer, followed by a Softmax in order for it to make a classification prediction.
+**MobileNet V2**
+  - The residual connection or skip connection, takes the input from the previous layer and sums it or passes it directly to the next layer, does allow ingredients to propagate backward more efficiently.
+  - The second change is that it also has an expansion layer.
+  - The residual block repeats itself 17 times
+  - **BottleNeck Module**
+    - ![](Images/49.png)
+    - A large number of `1x1x3` filters, say 18 filters are used, so that you end up with an `n x n x 18` 18-dimensional block. A factor of expansion of six is quite typical in MobileNet v2 which is why your inputs goes from `n x n x 3` to `n x n x 18`, and that's why we call it an expansion as well, it increases the dimension of this by a factor of six.
+    - With padding, you can maintain the `n x n x 18` dimension, so it doesn't shrink when you apply the depthwise convolution. 
+    - Finally, you apply a pointwise convolution, which in this case means convolving with a `1 x 1 x 18`-dimensional filter.
+    - If `nc' (prime)=3` you end up with `n x n x 3` output. This last step is also called a projection step because you're projecting down from `n x n x 18` down to `n x n x 3`.
+
+  - **Why do we need BottleNeck?**
+    - It increases the size of the representation within the bottleneck block. This allows the neural network to learn a richer function but increases the computation needs too.
+    - When deploying on a mobile device, on edge device, you will often be heavy memory constraints. The bottleneck block uses the pointwise convolution or the projection operation in order to project it back down to a smaller set of values, so that when you pass this the next block, the amount of memory needed to store these values is reduced back down.
 
 ### Using Open-Source Implementation
 
@@ -736,7 +813,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     		}
     ```
 
-  - In practice we use logistic regression for `pc`, log likely hood loss for classes, and squared error for the bounding box.
+  - In practice we use logistic regression loss for `pc`, log likely hood loss for classes, and squared error for the bounding box.
 
 ### Landmark Detection
 
@@ -788,15 +865,17 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - **Convolution implementation of sliding windows**:
   - First lets consider that the Conv net you trained is like this (No FC all is conv layers):
     - ![](Images/20.png)
-  - Say now we have a 16 x 16 x 3 image that we need to apply the sliding windows in. By the normal implementation that have been mentioned in the section before this, we would run this Conv net four times each rectangle size will be 16 x 16.
+  - Say now we have a 16 x 16 x 3 image that we need to apply the sliding windows in. By the normal implementation that have been mentioned in the section before this, we would run this Conv net four times each rectangle size will be 14 x 14.
+  - The convolutional implementation of sliding windows allows these four passes in the convnet to share a lot of computation. 
   - The convolution implementation will be as follows:
     - ![](Images/21.png)
   - Simply we have feed the image into the same Conv net we have trained.
-  - The left cell of the result "The blue one" will represent the the first sliding window of the normal implementation. The other cells will represent the others.
+  - It turns out that the blue region of `1x1x4` subset gives you the result of running in the upper left hand corner of `14x14` image. This upper right `1x1x4` volume gives you the upper right result. The lower left gives you the results of implementing the convnet on the lower left `14x14` region. And the lower right `1x1x4` volume gives you the same result as running the convnet on the lower right `14x14` region.
   - Its more efficient because it now shares the computations of the four times needed.
   - Another example would be:
     - ![](Images/22.png)
   - This example has a total of 16 sliding windows that shares the computation together.
+  - Instead of forcing you to run four propagation on 16 subsets of the input image independently, Instead, it combines all 16 into one form of computation and shares a lot of the computation in the regions of image that are common.
   - [[Sermanet et al., 2014, OverFeat: Integrated recognition, localization and detection using convolutional networks]](https://arxiv.org/abs/1312.6229)
 - The weakness of the algorithm is that the position of the rectangle wont be so accurate. Maybe none of the rectangles is exactly on the object you want to recognize.
   - ![](Images/23.png)
@@ -817,7 +896,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   3. Apply the classification and localization algorithm we discussed in a previous section to each section of the grid. `bx` and `by` will represent the center point of the object in each grid and will be relative to the box so the range is between 0 and 1 while `bh` and `bw` will represent the height and width of the object which can be greater than 1.0 but still a floating point value.
   4. Do everything at once with the convolution sliding window. If Y shape is 1 x 8 as we discussed before then the output of the 100 x 100 image should be 3 x 3 x 8 which corresponds to 9 cell results.
   5. Merging the results using predicted localization mid point.
-
+- ![](Images/51.png)
 - We have a problem if we have found more than one object in one grid box.
 
 - One of the best advantages that makes the YOLO algorithm popular is that it has a great speed and a Conv net implementation.
@@ -834,6 +913,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 - For example:
   - ![](Images/25.png)
   - The red is the labeled output and the purple is the predicted output.
+  - ![](Images/50.png)
   - To compute Intersection Over Union we first compute the union area of the two rectangles which is "the first rectangle + second rectangle" Then compute the intersection area between these two rectangles.
   - Finally `IOU = intersection area / Union area`
 - If `IOU >=0.5` then its good. The best answer will be 1.
@@ -888,13 +968,24 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   2. Car.
   3. Motorcycle.
 
-- We decided to choose two anchor boxes, a taller one and a wide one.
+- **TRAINING**
+- ![](Images/52.png)
+  - Grid Size : 3x3
+  - Anchors per grid = 2
+  - Object Classes = 3
+  - Y Label Shape = 3x3x2x(5+3) = `3x3x16`
+  - Ex if 5 anchors and 5 classes then Y shape = 3x3x5x(5+5) = `3x3x50`
+  - This is how the training process is done – taking an image of a particular shape and mapping it with a 3 X 3 X 16 target (this may change as per the grid size, number of anchor boxes and the number of classes).
 
   - Like we said in practice they use five or more anchor boxes hand made or generated using k-means.
 
 - Our labeled Y shape will be `[Ny, HeightOfGrid, WidthOfGrid, 16]`, where Ny is number of instances and each row (of size 16) is as follows:
 
   - `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`
+  - Here,
+    - pc defines whether an object is present in the grid or not (it is the probability)
+    - bx, by, bh, bw specify the bounding box if there is an object
+    - c1, c2, c3 represent the classes. So, if the object is a car, c2 will be 1 and c1 & c3 will be 0, and so on
 
 - Your dataset could be an image with a multiple labels and a rectangle for each label, we should go to your dataset and make the shape and values of Y like we agreed.
 
@@ -903,7 +994,7 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - We first initialize all of them to zeros and ?, then for each label and rectangle choose its closest grid point then the shape to fill it and then the best anchor point based on the IOU. so that the shape of Y for one image should be `[HeightOfGrid, WidthOfGrid,16]`
 
 - Train the labeled images on a Conv net. you should receive an output of `[HeightOfGrid, WidthOfGrid,16]` for our case.
-
+- **PREDICTION**
 - To make predictions, run the Conv net on an image and run Non-max suppression algorithm for each class you have in our case there are 3 classes.
 
   - You could get something like that:
@@ -911,9 +1002,17 @@ Here is the course summary as given on the course [link](https://www.coursera.or
     - Total number of generated boxes are grid_width * grid_height * no_of_anchors = 3 x 3 x 2
   - By removing the low probability predictions you should have:
     - ![](Images/32.png)
-  - Then get the best probability followed by the IOU filtering:
+  - Then get the best probability followed by the IOU filtering (**Non-Maximum Suppression**):
     - ![](Images/33.png)
 
+  - **Exact dimensions and steps that the YOLO algorithm follows**:
+    - Takes an input image of shape (608, 608, 3)
+    - Passes this image to a convolutional neural network (CNN), which returns a (19, 19, 5, 85) dimensional output
+    - The last two dimensions of the above output are flattened to get an output volume of (19, 19, 425):
+      - Here, each cell of a 19 X 19 grid returns 425 numbers
+      - 425 = 5 * 85, where 5 is the number of anchor boxes per grid
+      - 85 = 5 + 80, where 5 is (pc, bx, by, bh, bw) and 80 is the number of classes we want to detect
+    - Finally, we do the IoU and Non-Max Suppression to avoid selecting overlapping boxes
 - YOLO are not good at detecting smaller object.
 
 - [YOLO9000 Better, faster, stronger](https://arxiv.org/abs/1612.08242)
@@ -1134,6 +1233,46 @@ Here is the course summary as given on the course [link](https://www.coursera.or
 
   - [[Jifeng Dai, et. al 2016 R-FCN: Object Detection via Region-based Fully Convolutional Networks ]](https://arxiv.org/abs/1605.06409)
 
+### Semantic Segmentation with U-Net
+- **Motivation**
+- Semantic segmentation describes the process of associating each pixel of an image with a class label, (such as flower, person, road, sky, ocean, or car). Applications for semantic segmentation include: Autonomous driving.
+
+- ![](Images/53.png)
+- This is a lot of outputs, instead of just giving a single class label or maybe a class label and coordinates, the neural network in this case, has to generate a whole matrix of labels. 
+- A key step to do that is to take a small set of activations and to blow it up to a bigger set of activations. In order to do that, you have to implement something called the **transpose convolution**.
+
+### Transpose Convolutions
+- ![](Images/54.png)
+  - In the transpose convolution, instead of placing the filter on the input, you would instead place a filter on the output.
+  - We are going to take the number 2 (input matrix) and multiply it by every single value in the filter and take the output which is again a `3x3` matrix and paste it on output's position.
+  - Padding area isn't going to contain any values, thus we ignore this padding region and just throw in four values in the red highlighted area.
+  - Continue this for all four input matrix values maintaining the stride=2 for every pass.
+  - This allows to blow up the input matrix (2x2) to (4x4) large matrix.
+
+### U-Net Architecture Intuition
+- ![](Images/55.png)
+  - We use normal convolutions for the first part of the neural network. 
+  - This part of the neural network will compresses the image from a very large image to one where the height-width of this activation is much smaller.
+  - So you've lost a lot of spatial information because the dimension is much smaller, but it's much deeper. So, for example, this middle layer may represent that looks like there's a cat roughly in the lower right hand portion of the image.
+
+  - The second half of this neural network uses the transpose convolution to blow the representation size up back to the size of the original input image.
+  - We also use skip connections from the earlier layers to the later layers so that the earlier block of activations is copied directly to this later block.
+  - **Why skip connections?**
+    - For last layer to make predictions two types of information are useful.
+    - One is the high level, spatial, high level contextual information which it gets from this previous layer.
+    - The high resolution, low level, but more detailed texture like information from the earlier layers.
+
+### U-Net Architecture
+- ![](Images/56.png)
+  - The first part of the unit uses normal feed forward neural network convolutional layers. 
+  - The black arrow denote a convolutional layer, followed by a ReLu activation function.
+  - Max pooling to reduce the height and width.
+  - The height of the layer becomes really small so we apply **Transpose Convolution** to build the dimension of this neural network back up. 
+  - The light blue part comes from the transpose convolution, and the dark blue part is just copied over from the left.
+  - Finally, a `1x1` convolution layer, denoted with a magenta arrow to finally give output.4
+  - The dimensions of the output layer is going to be `h x w x #classes`, for every one of your pixels `h x w x 3` input image there exists an array or a vector, of n classes that signifies how likely is that pixel to come from each of these different classes. 
+  - Taking a **arg max** over these n classes, will classify each of the pixels into one of the classes, and visualize it like the segmentation map
+
 ## Special applications: Face recognition & Neural style transfer
 
 > Discover how CNNs can be applied to multiple fields, including art generation and face recognition. Implement your own algorithm to generate art and recognize faces!
@@ -1312,9 +1451,9 @@ Here is the course summary as given on the course [link](https://www.coursera.or
   - Reshape activation from H X W X C to HW X C
   - Name the reshaped activation F.
   - `G[l] = F * F.T`
-- Finally the cost function will be as following:
+- Finally the cost function will be the Frobenius norm between **Style matrices** of `Generated` and `Style` images as following:
   - `J(S, G) at layer l = (1/ 2 * H * W * C) || G(l)(s) - G(l)(G) ||`
-- And if you have used it from some layers
+- It turns out that you get more visually pleasing results if you use the style cost function from multiple different layers. So, the overall style cost function, you can define as sum over all the different layers of the style cost function for that layer.
   - `J(S, G) = Sum (lamda[l]*J(S, G)[l], for all layers)`
 - Steps to be made if you want to create a tensorflow model for neural style transfer:
   1. Create an Interactive Session.

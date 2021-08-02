@@ -81,6 +81,7 @@ Here are the course summary as its given on the course [link](https://www.course
      - If its not achieved you could try bigger dev. set...
   4. Performs well in real world.
      - If its not achieved you could try change dev. set, change cost function...
+- Early Stopping - simultaneously affects how well you fit the training set,because if you stop early, you less fit the training set as well as to improve your dev set performance.So this is one knob that is less orthogonalized,because it simultaneously affects two things.
 
 ### Single number evaluation metric
 
@@ -102,6 +103,9 @@ Here are the course summary as its given on the course [link](https://www.course
   | ---------- | --------- | ------ |
   | A          | 95%       | 90%    |
   | B          | 98%       | 85%    |
+
+- So if classifier A has **95% precision**, this means that when classifier A says something is a cat, there's a 95% chance it really is a cat. 
+- And **recall** is, of all the images that really are cats, what percentage were correctly recognized by your classifier?
 - A better thing is to combine precision and recall in one single (real) number evaluation metric. There a metric called `F1` score, which combines them
   - You can think of `F1` score as an average of precision and recall
     `F1 = 2 / ((1/P) + (1/R))`
@@ -190,11 +194,16 @@ Here are the course summary as its given on the course [link](https://www.course
   - You can't do better than Bayes error unless you are overfitting.
   - `Avoidable bias = Training error - Human (Bayes) error`
   - `Variance = Dev error - Training error`
-
+  - ![](Images/1.png)
 ### Understanding human-level performance
 
 - When choosing human-level performance, it has to be chosen in the terms of what you want to achieve with the system.
 - You might have multiple human-level performances based on the human experience. Then you choose the human-level performance (proxy for Bayes error) that is more suitable for the system you're trying to build.
+- Suppose for medical image classification example:
+  - (a) Typical human ………………. 3 % error
+  - (b) Typical doctor ………………... 1 % error
+  - (c) Experienced doctor …………... 0.7 % error
+  - (d) Team of experienced doctors .. 0.5 % error
 - Improving deep learning algorithms is harder once you reach a human-level performance.
 - Summary of bias/variance with human-level performance:
   1. human-level error (proxy for Bayes error)
@@ -263,7 +272,8 @@ Here are the course summary as its given on the course [link](https://www.course
 
 ### Cleaning up incorrectly labeled data
 
-- DL algorithms are quite robust to random errors in the training set but less robust to systematic errors. But it's OK to go and fix these labels if you can.
+- DL algorithms are quite **robust to random errors** in the training set but **less robust to systematic errors**. But it's OK to go and fix these labels if you can.
+- If your labeler consistently labels white dogs as cats, then that is a problem because your classifier will learn to classify all white colored dogs as cats. But random errors or near random errors are usually not too bad for most deep learning algorithms.
 - If you want to check for mislabeled data in dev/test set, you should also try error analysis with the mislabeled column. Ex:
 
   | Image        | Dog    | Great Cats | blurry  | Mislabeled | Comments |
@@ -295,11 +305,12 @@ Here are the course summary as its given on the course [link](https://www.course
 ### Training and testing on different distributions
 
 - A lot of teams are working with deep learning applications that have training sets that are different from the dev/test sets due to the hunger of deep learning to data.
+- ![](Images/2.png)
 - There are some strategies to follow up when training set distribution differs from dev/test sets distribution.
-  - Option one (not recommended): shuffle all the data together and extract randomly training and dev/test sets.
+  - Option one (not recommended): shuffle all the data together (belonging to different distributions) and extract randomly training and dev/test sets.
     - Advantages: all the sets now come from the same distribution.
-    - Disadvantages: the other (real world) distribution that was in the dev/test sets will occur less in the new dev/test sets and that might be not what you want to achieve.
-  - Option two: take some of the dev/test set examples and add them to the training set.
+    - Disadvantages: the other (real world) distribution that was in the dev/test sets (data we care about!) will occur less in the new dev/test sets and that might be not what you want to achieve.
+  - Option two: take some of the dev/test set examples and add them to the training set and keep dev/test as purely the real world application data(different distribution and the data we care about!).
     - Advantages: the distribution you care about is your target now.
     - Disadvantage: the distributions in training and dev/test sets are now different. But you will get a better performance over a long time.
 
@@ -310,19 +321,19 @@ Here are the course summary as its given on the course [link](https://www.course
   - Human error: 0%
   - Train error: 1%
   - Dev error: 10%
-  - In this example, you'll think that this is a variance problem, but because the distributions aren't the same you can't tell for sure. Because it could be that train set was easy to train on, but the dev set was more difficult.
-- To solve this issue we create a new set called train-dev set as a random subset of the training set (so it has the same distribution) and we get:
+  - In this example, you'll think that this is a variance problem, but because the distributions aren't the same you can't tell for sure. Because it could be that train set was easy to train on, but the dev set was more difficult (or real world application data).
+- To solve this issue we create a new set called **train-dev set** as a random subset of the training set **(so it has the same distribution)** and we get:
   - Human error: 0%
   - Train error: 1%
   - Train-dev error: 9%
   - Dev error: 10%
-  - Now we are sure that this is a high variance problem.
+  - Now we are sure that this is a **high variance problem**.
 - Suppose we have a different situation:
   - Human error: 0%
   - Train error: 1%
   - Train-dev error: 1.5%
   - Dev error: 10%
-  - In this case we have something called *Data mismatch* problem.
+  - In this case we have something called **Data mismatch** problem. So somehow your algorithm has learned to do well on a different distribution than what you really care about
 - Conclusions:
   1. Human-level error (proxy for Bayes error)
   2. Train error
@@ -336,7 +347,8 @@ Here are the course summary as its given on the course [link](https://www.course
      - If difference is much bigger then train-dev error its **Data mismatch** problem.
   5. Test error
      - Calculate `degree of overfitting to dev set = test error - dev error`
-     - Is the difference is big (positive) then maybe you need to find a bigger dev set (dev set and test set come from the same distribution, so the only way for there to be a huge gap here, for it to do much better on the dev set than the test set, is if you somehow managed to overfit the dev set).
+     - If the difference is big (positive) then maybe you need to find a bigger dev set (dev set and test set come from the same distribution, so the only way for there to be a huge gap here, for it to do much better on the dev set than the test set, is if you somehow managed to overfit the dev set).
+- ![](Images/3.png)
 - Unfortunately, there aren't many systematic ways to deal with data mismatch. There are some things to try about this in the next section.
 
 ### Addressing data mismatch
@@ -365,7 +377,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - Low level features from task A could be helpful for learning task B.
 
 ### Multi-task learning
-
+- ![](Images/4.png)
 - Whereas in transfer learning, you have a sequential process where you learn from task A and then transfer that to task B. In multi-task learning, you start off simultaneously, trying to have one neural network do several things at the same time. And then each of these tasks helps hopefully all of the other tasks. 
 - Example:
   - You want to build an object recognition system that detects pedestrians, cars, stop signs, and traffic lights (image has multiple labels).
@@ -382,6 +394,7 @@ Here are the course summary as its given on the course [link](https://www.course
   ```
   - And in this case it will do good with the missing data, just the loss function will be different:   
     `Loss = (1/m) * sum(sum(L(y_hat(i)_j, y(i)_j) for all j which y(i)_j != ?))`
+  - Whenever there's a question mark, you just omit that term from summation and just sum over only the values where there is a label. 
 - Multi-task learning makes sense:
   1. Training on a set of tasks that could benefit from having shared lower-level features.
   2. Usually, amount of data you have for each task is quite similar.

@@ -2,7 +2,7 @@
 
 * [Interview Prep](/docs/dl-ml-interview/README.md)
 
-- [Computer Vision](/docs/OpenCV/README.md)
+- [Notebooks](/docs/notebooks/README.md)
 
 
 

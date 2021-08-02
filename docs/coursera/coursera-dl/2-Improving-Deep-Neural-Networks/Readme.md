@@ -167,9 +167,9 @@ Here are the course summary as its given on the course [link](https://www.course
            = w[l] - (learning_rate*lambda/m) * w[l] - learning_rate * (from back propagation) 
            = (1 - (learning_rate*lambda)/m) * w[l] - learning_rate * (from back propagation)
       ```
-
+-  ![](Images/8.png)
   - In practice this penalizes large weights and effectively limits the freedom in your model.
-
+-  ![](Images/9.png)
   - The new term `(1 - (learning_rate*lambda)/m) * w[l]`  causes the **weight to decay** in proportion to its size.
 
 
@@ -193,6 +193,7 @@ _**Implementation tip**_: if you implement gradient descent, one of the steps to
 - In most cases Andrew Ng tells that he uses the L2 regularization.
 - The dropout regularization eliminates some neurons/weights on each iteration based on a probability.
 - A most common technique to implement dropout is called "Inverted dropout".
+-  ![](Images/10.gif)
 - Code for Inverted dropout:
 
   ```python
@@ -257,14 +258,17 @@ _**Implementation tip**_: if you implement gradient descent, one of the steps to
   3. Get the variance of the training set: `variance = (1/m) * sum(x(i)^2)`
   4. Normalize the variance. `X /= variance`
 - These steps should be applied to training, dev, and testing sets (but using mean and variance of the train set).
-  - ![](Images/4.png)
+  - ![](Images/11.gif)
 - Why normalize?
   - If we don't normalize the inputs our cost function will be deep and its shape will be inconsistent (elongated) then optimizing it will take a long time.
   - But if we normalize it the opposite will occur. The shape of the cost function will be consistent (look more symmetric like circle in 2D example) and we can use a larger learning rate alpha - the optimization will be faster.
   - If you have more spherical contours, then wherever you start, gradient descent can pretty much go straight to the minimum. You can take much larger steps where gradient descent need, rather than needing to oscillate around like the picture on the left.
-  - ![](Images/3.png)
-### Vanishing / Exploding gradients
+- ![](Images/12.gif)
+  - The figure on the left shows the cost function graph for unnormalized data, it is much broader and takes a long time for gradient descent to march towards the minimum.
+  - The figure on the right shows the cost function graph after normalizing the data, the graph looks more symmetric, and gradient descent quickly converges towards the minimum.
 
+### Vanishing / Exploding gradients
+- ![](Images/13.gif)
 - The Vanishing / Exploding gradients occurs when your derivatives become very small or very big.
 - To understand the problem, suppose that we have a deep neural network with number of layers L, and all the activation functions are **linear** and each `b = 0`
   - Then:   
@@ -386,9 +390,9 @@ Implications of L2-regularization on:
 - During training time, divide each dropout layer by keep_prob to keep the same expected value for the activations. For example, if `keep_prob` is 0.5, then we will on average shut down half the nodes, so the output will be scaled by 0.5 since only the remaining half are contributing to the solution. Dividing by 0.5 is equivalent to multiplying by 2. Hence, the output now has the same expected value. You can check that this works even when keep_prob is other values than 0.5.
 
 ## **Notebooks**
- - [Initialization](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/Initialization.htm)
- - [Regularization](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/Regularization.htm) 
-- [Gradient_Checking](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/Gradient_Checking.htm) 
+ - [2.1_Initialization](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/2.1_Initialization.htm)
+ - [2.2_Regularization](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/2.2_Regularization.htm) 
+- [2.3_Gradient_Checking](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/2.3_Gradient_Checking.htm) 
 
 ## Optimization algorithms
 
@@ -609,7 +613,8 @@ Implications of L2-regularization on:
   - Plateau is a region where the derivative is close to zero for a long time.
   - This is where algorithms like momentum, RMSprop or Adam can help.
 
-
+## **Notebooks**
+ - [2.4_Optimization_methods](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/2.4_Optimization_methods.htm)
 
 ## Hyperparameter tuning, Batch Normalization and Programming Frameworks
 
@@ -904,7 +909,8 @@ _**Side notes:**_
   - First one to win ImageNet
   - Works in PaddlePaddle deep learning platform.
 
-
+## **Notebooks**
+ - [2.5_Tensorflow_introduction](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/2.5_Tensorflow_introduction.htm)
 
 
 

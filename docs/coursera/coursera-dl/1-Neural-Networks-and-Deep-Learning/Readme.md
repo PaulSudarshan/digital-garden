@@ -349,7 +349,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - [Pieter Abbeel](https://www2.eecs.berkeley.edu/Faculty/Homepages/abbeel.html) is one of the best in deep reinforcement learning.
 
 ## **Notebooks**
- - [Logistic_Regression_with_a_Neural_Network_mindset](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/Logistic_Regression_with_a_Neural_Network_mindset.htm)
+ - [1.1_Logistic_Regression_with_a_Neural_Network_mindset](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/1.1_Logistic_Regression_with_a_Neural_Network_mindset.htm)
 
 ## Shallow neural networks
 
@@ -583,7 +583,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - Constant 0.01 is alright for 1 hidden layer networks, but if the NN is deep this number can be changed but it will always be a small number.
 
 ## **Notebooks**
- - [Planar_data_classification_with_one_hidden_layer](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/Planar_data_classification_with_one_hidden_layer.htm)
+ - [1.2_Planar_data_classification_with_one_hidden_layer](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/1.2_Planar_data_classification_with_one_hidden_layer.htm)
 
 ## Deep Neural Networks
 
@@ -706,8 +706,8 @@ Here are the course summary as its given on the course [link](https://www.course
 - NN is a small representation of how brain work. The most near model of human brain is in the computer vision (CNN)
 
 ## **Notebooks**
- - [Building_your_Deep_Neural_Network_Step_by_Step](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/Building_your_Deep_Neural_Network_Step_by_Step.htm)
- - [Deep_Neural_Network_Application](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/Deep_Neural_Network_Application.htm)
+ - [1.3_Building_your_Deep_Neural_Network_Step_by_Step](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/1.3_Building_your_Deep_Neural_Network_Step_by_Step.htm)
+ - [1.4_Deep_Neural_Network_Application](https://paulsudarshan.github.io/ml-dl-notes/notebooks/coursera-dl/1.4_Deep_Neural_Network_Application.htm)
 
 ## Extra: Ian Goodfellow interview
 
