@@ -18,6 +18,9 @@
   - [Deep Learning](/docs/notebooks/dl.md)
   - [EDA](/docs/notebooks/eda.md)
 
+* Cloud
+  - [Azure-900](/docs/cloud/README.md)
+
 
 
 
