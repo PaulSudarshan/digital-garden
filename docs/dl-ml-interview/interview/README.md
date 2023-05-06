@@ -8,3 +8,6 @@
 - [NLP_QA](https://paulsudarshan.github.io/ml-dl-notes/interview/NLP_QA.html)
 - [OneStop4ML_Interviews](https://paulsudarshan.github.io/ml-dl-notes/interview/OneStop4ML_Interviews.html)
 - [Python_Interview](https://paulsudarshan.github.io/ml-dl-notes/interview/Python_Interview.html)
+- [interview_reckoner](https://paulsudarshan.github.io/ml-dl-notes/interview/interview_reckoner.html)
+- [sql_theory](https://paulsudarshan.github.io/ml-dl-notes/interview/sql_theory.html)
+- [sql_interview](https://paulsudarshan.github.io/ml-dl-notes/interview/sql_interview.html)

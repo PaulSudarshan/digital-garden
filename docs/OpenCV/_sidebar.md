@@ -1,6 +1,11 @@
-- [Coursera_DL](/docs/notebooks/coursera_dl.md)
-- [Computer Vision](/docs/OpenCV/README.md)
-- [Machine Learning](/docs/notebooks/ml.md)
-- [Deep Learning](/docs/notebooks/dl.md)
+* [Coursera](/docs/coursera/README.md)
+
+* [Interview Prep](/docs/dl-ml-interview/README.md)
+
+- [Notebooks](/docs/notebooks/README.md)
+
+- [Cloud](/docs/cloud/README.md)
+
+
 
 
